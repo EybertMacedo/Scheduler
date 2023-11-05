@@ -16,28 +16,29 @@
             <br><br>
             <button type="submit">Añadir</button>
             <hr>
-        </form>       
-
+        </form>  
+        <% let curso = info.cursosAgregados[info.cursosAgregados.length - 1]; 
+        if (anadirCurso){ %>
         <label for="formDetallarCurso" >Detallar Curso:</label>
             <form action="/detallar-curso" id="formDetallarCurso" method="post">
-                <% for (var i = 0, len = cantidadGrupos; i < len; i++) { %>
+                <% for (var i = 0, len = curso.cantidadGrupos; i < len; i++) { %>
                 <h2>Grupo <%= i+1 %></h2>
                 <label for="dia1_<%= i+1 %>">Dia :</label>
                 <select id="dia1_<%= i+1 %>" name="dia1_<%= i+1 %>">
-                    <% dias.forEach(function(dia) { %>
+                    <% info.dias.forEach(function(dia) { %>
                         <option value="<%= dia %>"><%= dia %></option>
                     <% }); %>    
                 </select>
 
                 <label for="horasInicio1_<%= i+1 %>">Hora de Inicio:</label>
                 <select id="horasInicio1_<%= i+1 %>" name="horasInicio1_<%= i+1 %>">
-                    <% horasInicio.forEach(function(hour) { %>
+                    <% info.horasInicio.forEach(function(hour) { %>
                         <option value="<%= hour %>"><%= hour %></option>
                     <% }); %>    
                 </select>
                 <label for="horasFin1_<%= i+1 %>" >Hora de Fin:</label>
                 <select id="horasFin1_<%= i+1 %>" name="horasFin1_<%= i+1 %>">
-                    <% horasFin.forEach(function(hour) { %>
+                    <% info.horasFin.forEach(function(hour) { %>
                         <option value="<%= hour %>"><%= hour %></option>
                     <% }); %>
                 </select> 
@@ -45,20 +46,20 @@
 
                 <label for="dia2_<%= i+1 %>">Dia:</label>
                 <select id="dia2_<%= i+1 %>" name="dia2_<%= i+1 %>">
-                    <% dias.forEach(function(dia) { %>
+                    <% info.dias.forEach(function(dia) { %>
                         <option value="<%= dia %>"><%= dia %></option>
                     <% }); %>    
                 </select>
 
                 <label for="horasInicio2_<%= i+1 %>">Hora de Inicio 2:</label>
                 <select id="horasInicio2_<%= i+1 %>" name="horasInicio2_<%= i+1 %>">
-                    <% horasInicio.forEach(function(hour) { %>
+                    <% info.horasInicio.forEach(function(hour) { %>
                         <option value="<%= hour %>"><%= hour %></option>
                     <% }); %>
                 </select>
                 <label for="horasFin2_<%= i+1 %>">Hora de Fin 2:</label>
                 <select id="horasFin2_<%= i+1 %>" name="horasFin2_<%= i+1 %>">
-                    <% horasFin.forEach(function(hour) { %>
+                    <% info.horasFin.forEach(function(hour) { %>
                         <option value="<%= hour %>"><%= hour %></option>
                     <% }); %>    
                 </select>
@@ -70,12 +71,14 @@
 
             </form>
         
+        <% }; %>
+        
         <a href="/cursos">Ver Curso Agregado</a>
 
         <div id="cursos-container">
             <h2>Cursos Agregados</h2>
             <ul>
-                <% cursos.forEach(curso => { %>
+                <% info.cursosAgregados.forEach(curso => { %>
                     <li><strong>Nombre del Curso:</strong> <%= curso.nombreCurso %></li>
                     <li><strong>Cantidad:</strong> <%= curso.cantidadGrupos %></li>
                     <hr>
